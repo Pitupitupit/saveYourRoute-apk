@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.inzv1.arcturuspiotrek.inzv1.MainActivity">
+
+    <GridLayout
+        android:id="@+id/layoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        android:rowCount="4"
+        android:orientation="horizontal">>
+
+        <Button
+            android:id="@+id/button_start"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:maxWidth="180dp"
+            android:minWidth="180dp"
+            android:text="Start"
+            android:textColor="@color/color_text_button_start_stop"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/button_stop"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:maxWidth="180dp"
+            android:minWidth="180dp"
+            android:text="Stop"
+            android:textColor="@color/color_text_button_start_stop"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/infoTextView"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_columnSpan="2"
+            android:layout_columnWeight="1"
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:background="#e6e6e6"
+            android:gravity="center"
+            android:maxWidth="360dp"
+            android:text="NO POINTS"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+            android:textColor="@color/color_text_button_start_stop"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/linkTextView"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_columnSpan="2"
+            android:layout_columnWeight="1"
+            android:layout_row="2"
+            android:layout_rowWeight="1"
+            android:background="#ffff99"
+            android:gravity="center"
+            android:maxWidth="360dp"
+            android:text="NO LINK"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+            android:textColor="@color/color_text_button_start_stop"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/buttonWhereAmI"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_columnSpan="2"
+            android:layout_columnWeight="1"
+            android:layout_row="3"
+            android:layout_rowWeight="1"
+            android:background="#8080ff"
+            android:text="Where am I?"
+            android:textColor="@color/color_text_button_start_stop"
+            android:textSize="30sp" />
+
+    </GridLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

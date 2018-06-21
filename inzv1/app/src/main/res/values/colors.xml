@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#cccccc</color>
+    <color name="colorPrimaryDark">#666666</color>
+    <color name="colorAccent">#4d79ff</color>
+
+    <color name="color_button_start_default">#79ff4d</color>
+    <color name="color_button_start_pressed">#b3ff99</color>
+    <color name="color_button_stop_default">#ff4d4d</color>
+    <color name="color_button_stop_pressed">#ff9999</color>
+    <color name="fiolet_default">#d633ff</color>
+    <color name="fiolet_pressed">#e580ff</color>
+    <color name="blue_default">#4d79ff</color>
+
+    <color name="color_text_button_start_stop">#666666</color>
+</resources>
