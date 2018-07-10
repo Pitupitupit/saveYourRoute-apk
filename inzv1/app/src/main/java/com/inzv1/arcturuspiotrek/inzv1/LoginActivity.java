@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -40,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
@@ -93,7 +96,12 @@ public class LoginActivity extends AppCompatActivity {
 
         button_register.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Uri uri = Uri.parse("http://89.76.174.133:3000/register");
+                System.out.println("DOMENA:"+getString(R.string.domain));
+                final String ip =  "http://"+MainActivity.getIpOfDomain(getString(R.string.domain));
+                System.out.println("IP:"+ip);
+                Uri uri = Uri.parse(ip+"/register");
+                System.out.println("URI:"+uri.toString());
+
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
@@ -109,7 +117,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void RESTPostLogin(final String login, final String password, final MainActivity.VolleyCallback callback) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://89.76.174.133:3000/rest/login";
+        final String ip =  "http://"+MainActivity.getIpOfDomain(getString(R.string.domain));
+        String url = ip+"/rest/login";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
                 {

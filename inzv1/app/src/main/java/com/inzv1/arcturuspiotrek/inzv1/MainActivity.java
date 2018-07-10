@@ -16,6 +16,7 @@ import android.location.*;
 //import android.location.LocationProvider;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
@@ -50,6 +51,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -93,7 +95,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     protected void onCreate(Bundle savedInstanceState) {
         //Intent intent = getIntent();
         //String value = intent.getStringExtra("key"); //if it's a string you stored.
-
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -707,11 +710,25 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     }
 
+    public static String getIpOfDomain(String domain){
+        String ip;
+        try{
+            InetAddress address = java.net.InetAddress.getByName(domain);
+            ip = address.getHostAddress();
+            return ip;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private void RESTPostRoute(final String description, final boolean priv, final VolleyCallback callback) {
         RequestQueue queue = Volley.newRequestQueue(this);
         //Toast.makeText(getBaseContext(), "w funkcji", Toast.LENGTH_SHORT).show();
         //final String serverUrl = "http://89.70.176.12:3000/r";
-        String url = "http://89.76.174.133:3000/rest/insertRoute";
+        final String ip =  "http://"+getIpOfDomain(getString(R.string.domain));
+        String url = ip+"/rest/insertRoute";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
                 {
@@ -728,7 +745,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                             //textViewLink.setClickable(true);
                             textViewLink.setMovementMethod(LinkMovementMethod.getInstance());
 
-                            String text = "<a href='http://89.76.174.133:3000/route/"+routeref+"'> ROUTE: " +routeref+ "</a>";
+                            String text = "<a href='"+ip+"/route/"+routeref+"'> ROUTE: " +routeref+ "</a>";
                             textViewLink.setText(Html.fromHtml(text));
                             callback.onSuccess(re.getString("routeref"));
                             //textViewLink.setText("http://89.70.176.12:3000/route/"+routeref);
@@ -774,7 +791,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         RequestQueue queue = Volley.newRequestQueue(this);
         //Toast.makeText(getBaseContext(), "w chunku", Toast.LENGTH_SHORT).show();
         //final String serverUrl = "http://89.70.176.12:3000/r";
-        String url = "http://89.76.174.133:3000/rest/insertChunk";
+        final String ip =  "http://"+getIpOfDomain(getString(R.string.domain));
+        String url = ip+"/rest/insertChunk";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -824,7 +842,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     private void RESTPostLocation(final String name, final int userRef, final double latitude, final double longitude, final VolleyCallback callback) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://89.76.174.133:3000/rest/insertLocation";
+        final String ip =  "http://"+getIpOfDomain(getString(R.string.domain));
+        String url = ip+"/rest/insertLocation";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
